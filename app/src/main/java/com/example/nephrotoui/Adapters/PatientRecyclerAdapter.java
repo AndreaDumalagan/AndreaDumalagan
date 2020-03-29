@@ -16,16 +16,18 @@ import java.util.ArrayList;
 public class PatientRecyclerAdapter extends  RecyclerView.Adapter<PatientRecyclerAdapter.ViewHolder>{
 
     private ArrayList<Patient> mPatients = new ArrayList<>();
+    private OnPatientListener mOnPatientListener;
 
-    public PatientRecyclerAdapter(ArrayList<Patient> patients) {
+    public PatientRecyclerAdapter(ArrayList<Patient> patients, OnPatientListener onPatientListener) {
         this.mPatients = patients;
+        this.mOnPatientListener = onPatientListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_patient_list_item, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, mOnPatientListener);
     }
 
     @Override
@@ -41,14 +43,27 @@ public class PatientRecyclerAdapter extends  RecyclerView.Adapter<PatientRecycle
         return mPatients.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView patient_id, timestamp;
+        OnPatientListener onPatientListener;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, OnPatientListener onPatientListener) {
             super(itemView);
             patient_id = itemView.findViewById(R.id.patient_id);
             timestamp = itemView.findViewById(R.id.patient_timestap);
+            this.onPatientListener = onPatientListener;
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onPatientListener.onPatientClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnPatientListener{
+        void onPatientClick(int position);
     }
 }
