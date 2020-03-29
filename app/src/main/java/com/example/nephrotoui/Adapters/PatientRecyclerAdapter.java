@@ -31,11 +31,14 @@ public class PatientRecyclerAdapter extends  RecyclerView.Adapter<PatientRecycle
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        holder.timestamp.setText(mPatients.get(position).getTimestamp());
+        holder.patient_id.setText(mPatients.get(position).getPatient_id());
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mPatients.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
