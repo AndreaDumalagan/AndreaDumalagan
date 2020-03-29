@@ -1,6 +1,7 @@
 package com.example.nephrotoui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
         initRecyclerView();
         insertFakePatients();
+
+        setSupportActionBar((Toolbar)findViewById(R.id.patients_toolbar));
+        setTitle("Patient List");
     }
 
     private void insertFakePatients(){
