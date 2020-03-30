@@ -1,14 +1,20 @@
 package com.example.nephrotoui;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.nephrotoui.Adapters.PatientRecyclerAdapter;
 import com.example.nephrotoui.Models.Patient;
@@ -29,6 +35,10 @@ public class MainActivity extends AppCompatActivity implements PatientRecyclerAd
     private ArrayList<Patient> mPatients = new ArrayList<>();
     private PatientRecyclerAdapter mPatientRecyclerAdapter;
 
+    ImageView imageView;
+    Button btnTakePicture;
+    FloatingActionButton floatingActionButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +52,36 @@ public class MainActivity extends AppCompatActivity implements PatientRecyclerAd
 
         setSupportActionBar((Toolbar)findViewById(R.id.patients_toolbar));
         setTitle("Patient List");
+
+        //Buttons
+        imageView = (ImageView) findViewById(R.id.imageView);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                //Open camera
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 100);
+            }
+        });
+
+        /*btnTakePicture = (Button) findViewById(R.id.btnTakePicture);
+        btnTakePicture.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                //Open camera
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 100);
+            }
+        });*/
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == 100){
+            //Get capture image
+            Bitmap captureImage = (Bitmap) data.getExtras().get("data");
+            //Set capture image to imageView (EVENTUALLY SEND TO DATABASE)
+            imageView.setImageBitmap(captureImage);
+        }
     }
 
     private void insertFakePatients(){
