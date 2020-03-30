@@ -11,4 +11,6 @@ public class InputNewKidney extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_new_kidney);
     }
+
+    //TODO: Add (1) option for user to continuously take pictures, and (2) input kidney specifications
 }
