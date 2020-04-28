@@ -86,10 +86,10 @@ public class MainActivity extends AppCompatActivity implements PatientRecyclerAd
 
     private void insertFakePatients(){
 
-        Patient donor_1 = new Patient("John Smith", "Mar 2020", "11 cm", "6 cm",
+        Patient donor_1 = new Patient("John Smith", "Mar 2020", "11", "6",
                                     "2", "4", "No", "No");
-        Patient donor_2 = new Patient("Jane Doe", "Mar 2020", "12 cm", "6 cm",
-                "2", "3.75 cm", "No", "Yes");
+        Patient donor_2 = new Patient("Jane Doe", "Mar 2020", "12", "6",
+                "2", "3.75", "No", "Yes");
 
         mPatients.add(donor_1);
         mPatients.add(donor_2);
@@ -109,8 +109,16 @@ public class MainActivity extends AppCompatActivity implements PatientRecyclerAd
     public void onPatientClick(int position) {
         Log.d(TAG, "onPatientClick: clicked " + position);
 
-        Intent intent = new Intent(this, KidneyDetails.class);
-        startActivity(intent);
+        Intent viewMetrics = new Intent(this, KidneyDetails.class);
+        viewMetrics.putExtra("View_Donor_Name", mPatients.get(position).getPatient_id());
+        viewMetrics.putExtra("View_Length", mPatients.get(position).getKidney_length());
+        viewMetrics.putExtra("View_Width", mPatients.get(position).getKidney_width());
+        viewMetrics.putExtra("View_#_of_Arteries", mPatients.get(position).getNum_of_arteries());
+        viewMetrics.putExtra("View_Dist_of_Arteries", mPatients.get(position).getDist_of_arteries());
+        viewMetrics.putExtra("View_Abnormalities", mPatients.get(position).getBool_abnormalities());
+        viewMetrics.putExtra("View_Surg_Damage", mPatients.get(position).getBool_surg_damage());
+
+        startActivity(viewMetrics);
         //Log.d(TAG, mPatients.get(position).getBool_abnormalities());
     }
 
