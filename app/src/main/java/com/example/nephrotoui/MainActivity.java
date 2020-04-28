@@ -1,10 +1,12 @@
 package com.example.nephrotoui;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements PatientRecyclerAdapter.OnPatientListener, View.OnClickListener {
 
     private static final String TAG = "MainActivity";
+    private static final int REQUEST_CODE_CHECK = 1;
 
     //UI Components
     private RecyclerView mRecyclerView;
@@ -41,13 +44,39 @@ public class MainActivity extends AppCompatActivity implements PatientRecyclerAd
         insertFakePatients();
 
         setSupportActionBar((Toolbar)findViewById(R.id.patients_toolbar));
-        setTitle("Patient List");
+        setTitle("Donor List");
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == REQUEST_CODE_CHECK){
+            if(resultCode == Activity.RESULT_OK){
+                String mDonorName = data.getStringExtra("Donor_Name");
+                String mDimLength = data.getStringExtra("Length");
+                String mDimWidth = data.getStringExtra("Width");
+                String mAmtArteries = data.getStringExtra("#_of_Arteries");
+                String mDistArteries = data.getStringExtra("Distance_of_Arteries");
+                String mAbnormalities = data.getStringExtra("Abnormalities");
+                String mSurgDamage = data.getStringExtra("Surg_Damage");
+
+                //Log.d(TAG, "Has abnormalities? " + mAbnormalities);
+
+                Patient patient = new Patient();
+                patient.setPatient_id(mDonorName);
+                patient.setTimestamp("Apr 2020");
+                mPatients.add(patient);
+            }
+        }
+        mPatientRecyclerAdapter.notifyDataSetChanged();
     }
 
     private void insertFakePatients(){
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 5; i++){
             Patient patient = new Patient();
-            patient.setPatient_id("Patient #" + (i+1));
+            patient.setPatient_id("Donor #" + (i+1));
             patient.setContent("Content #" + i);
             patient.setTimestamp("Mar 2020");
             mPatients.add(patient);
@@ -58,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements PatientRecyclerAd
     private void initRecyclerView(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(10);
+        VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(20);
         mRecyclerView.addItemDecoration(itemDecorator);
         mPatientRecyclerAdapter = new PatientRecyclerAdapter(mPatients, this);
         mRecyclerView.setAdapter(mPatientRecyclerAdapter);
@@ -75,6 +104,6 @@ public class MainActivity extends AppCompatActivity implements PatientRecyclerAd
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(this, InputNewKidney.class);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_CODE_CHECK);
     }
 }

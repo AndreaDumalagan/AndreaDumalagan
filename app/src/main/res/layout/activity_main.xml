@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
+            app:titleTextColor="#fff"
             app:layout_scrollFlags="scroll|enterAlways">
 
         </androidx.appcompat.widget.Toolbar>
