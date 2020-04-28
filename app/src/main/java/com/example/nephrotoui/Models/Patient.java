@@ -3,9 +3,7 @@ package com.example.nephrotoui.Models;
 public class Patient {
 
     private String patient_id;
-    private String content;
     private String timestamp;
-    private String donor_name;
     private String kidney_length;
     private String kidney_width;
     private String num_of_arteries;
@@ -13,14 +11,12 @@ public class Patient {
     private String bool_abnormalities;
     private String bool_surg_damage;
 
-    public Patient(String patient_id, String content, String timestamp,
-                   String donor_name, String kidney_length, String kidney_width,
+    public Patient(String patient_id, String timestamp,
+                   String kidney_length, String kidney_width,
                    String num_of_arteries, String dist_of_arteries,
                    String bool_abnormalities, String bool_surg_damage) {
         this.patient_id = patient_id;
-        this.content = content;
         this.timestamp = timestamp;
-        this.donor_name = donor_name;
         this.kidney_length = kidney_length;
         this.kidney_width = kidney_width;
         this.num_of_arteries = num_of_arteries;
@@ -40,28 +36,12 @@ public class Patient {
         this.patient_id = patient_id;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public String getTimestamp() {
         return timestamp;
     }
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public String getDonor_name(){
-        return donor_name;
-    }
-
-    public void setDonor_name(String donor_name){
-        this.donor_name = donor_name;
     }
 
     public String getKidney_length(){
@@ -116,7 +96,6 @@ public class Patient {
     public String toString() {
         return "Patient{" +
                 "patient_id='" + patient_id + '\'' +
-                ", content='" + content + '\'' +
                 ", timestamp='" + timestamp + '\'' +
                 '}';
     }

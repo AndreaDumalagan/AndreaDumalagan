@@ -31,6 +31,13 @@ public class MainActivity extends AppCompatActivity implements PatientRecyclerAd
     //Variables
     private ArrayList<Patient> mPatients = new ArrayList<>();
     private PatientRecyclerAdapter mPatientRecyclerAdapter;
+    private String mDonorName = "";
+    private String mDimLength = "";
+    private String mDimWidth = "";
+    private String mAmtArteries = "";
+    private String mDistArteries = "";
+    private String mAbnormalities = "";
+    private String mSurgDamage = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,19 +61,23 @@ public class MainActivity extends AppCompatActivity implements PatientRecyclerAd
 
         if(requestCode == REQUEST_CODE_CHECK){
             if(resultCode == Activity.RESULT_OK){
-                String mDonorName = data.getStringExtra("Donor_Name");
-                String mDimLength = data.getStringExtra("Length");
-                String mDimWidth = data.getStringExtra("Width");
-                String mAmtArteries = data.getStringExtra("#_of_Arteries");
-                String mDistArteries = data.getStringExtra("Distance_of_Arteries");
-                String mAbnormalities = data.getStringExtra("Abnormalities");
-                String mSurgDamage = data.getStringExtra("Surg_Damage");
-
-                //Log.d(TAG, "Has abnormalities? " + mAbnormalities);
+                mDonorName = data.getStringExtra("Donor_Name");
+                mDimLength = data.getStringExtra("Length");
+                mDimWidth = data.getStringExtra("Width");
+                mAmtArteries = data.getStringExtra("#_of_Arteries");
+                mDistArteries = data.getStringExtra("Distance_of_Arteries");
+                mAbnormalities = data.getStringExtra("Abnormalities");
+                mSurgDamage = data.getStringExtra("Surg_Damage");
 
                 Patient patient = new Patient();
                 patient.setPatient_id(mDonorName);
                 patient.setTimestamp("Apr 2020");
+                patient.setKidney_length(mDimLength);
+                patient.setKidney_width(mDimWidth);
+                patient.setNum_of_arteries(mAmtArteries);
+                patient.setDist_of_arteries(mDistArteries);
+                patient.setBool_abnormalities(mAbnormalities);
+                patient.setBool_surg_damage(mSurgDamage);
                 mPatients.add(patient);
             }
         }
@@ -74,13 +85,14 @@ public class MainActivity extends AppCompatActivity implements PatientRecyclerAd
     }
 
     private void insertFakePatients(){
-        for(int i = 0; i < 5; i++){
-            Patient patient = new Patient();
-            patient.setPatient_id("Donor #" + (i+1));
-            patient.setContent("Content #" + i);
-            patient.setTimestamp("Mar 2020");
-            mPatients.add(patient);
-        }
+
+        Patient donor_1 = new Patient("John Smith", "Mar 2020", "11 cm", "6 cm",
+                                    "2", "4", "No", "No");
+        Patient donor_2 = new Patient("Jane Doe", "Mar 2020", "12 cm", "6 cm",
+                "2", "3.75 cm", "No", "Yes");
+
+        mPatients.add(donor_1);
+        mPatients.add(donor_2);
         mPatientRecyclerAdapter.notifyDataSetChanged();
     }
 
@@ -99,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements PatientRecyclerAd
 
         Intent intent = new Intent(this, KidneyDetails.class);
         startActivity(intent);
+        //Log.d(TAG, mPatients.get(position).getBool_abnormalities());
     }
 
     @Override
