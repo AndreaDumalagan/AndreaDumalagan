@@ -47,9 +47,8 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
-                android:textSize="24sp"
                 android:text=""
-                />
+                android:textSize="24sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -60,7 +59,23 @@
                 android:text="Length"/>
 
             <TextView
-                android:id="@+id/view_kidney_length"
+                android:id="@+id/view_kidney_length_actual"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:textSize="24sp"
+                android:text=""
+                />
+            <TextView
+                android:id="@+id/view_kidney_length_calc"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:textSize="24sp"
+                android:text=""
+                />
+            <TextView
+                android:id="@+id/view_kidney_length_error"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
@@ -77,7 +92,23 @@
                 android:text="Width"/>
 
             <TextView
-                android:id="@+id/view_kidney_width"
+                android:id="@+id/view_kidney_width_actual"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:textSize="24sp"
+                android:text=""
+                />
+            <TextView
+                android:id="@+id/view_kidney_width_calc"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:textSize="24sp"
+                android:text=""
+                />
+            <TextView
+                android:id="@+id/view_kidney_width_error"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
@@ -110,12 +141,27 @@
                 android:text="Distance of Arteries"/>
 
             <TextView
-                android:id="@+id/view_dist_of_arteries"
+                android:id="@+id/view_dist_of_arteries_actual"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
                 android:textSize="24sp"
                 android:text=""/>
+            <TextView
+                android:id="@+id/view_dist_of_arteries_calc"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:textSize="24sp"
+                android:text=""/>
+            <TextView
+                android:id="@+id/view_dist_of_arteries_error"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:textSize="24sp"
+                android:text=""/>
+
 
             <TextView
                 android:layout_width="match_parent"

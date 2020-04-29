@@ -90,9 +90,12 @@ public class MainActivity extends AppCompatActivity implements PatientRecyclerAd
                                     "2", "4", "No", "No");
         Patient donor_2 = new Patient("Jane Doe", "Mar 2020", "12", "6",
                 "2", "3.75", "No", "Yes");
+        Patient donor_3 = new Patient("Barry McDonald", "Mar 2020", "15", "13.24","11.73%", "7", "6.03","13.86%",
+                "2", "3.75","3.04","18.93%", "No", "Yes");
 
         mPatients.add(donor_1);
         mPatients.add(donor_2);
+        mPatients.add(donor_3);
         mPatientRecyclerAdapter.notifyDataSetChanged();
     }
 
@@ -112,9 +115,15 @@ public class MainActivity extends AppCompatActivity implements PatientRecyclerAd
         Intent viewMetrics = new Intent(this, KidneyDetails.class);
         viewMetrics.putExtra("View_Donor_Name", mPatients.get(position).getPatient_id());
         viewMetrics.putExtra("View_Length", mPatients.get(position).getKidney_length());
+        viewMetrics.putExtra("View_Length_Calc", mPatients.get(position).getKidney_length_calc());
+        viewMetrics.putExtra("View_Length_Error", mPatients.get(position).getKidney_length_error());
         viewMetrics.putExtra("View_Width", mPatients.get(position).getKidney_width());
+        viewMetrics.putExtra("View_Width_Calc", mPatients.get(position).getKidney_width_calc());
+        viewMetrics.putExtra("View_Width_Error", mPatients.get(position).getKidney_width_error());
         viewMetrics.putExtra("View_#_of_Arteries", mPatients.get(position).getNum_of_arteries());
         viewMetrics.putExtra("View_Dist_of_Arteries", mPatients.get(position).getDist_of_arteries());
+        viewMetrics.putExtra("View_Dist_of_Arteries_Calc", mPatients.get(position).getDist_of_arteries_calc());
+        viewMetrics.putExtra("View_Dist_of_Arteries_Error", mPatients.get(position).getDist_of_arteries_error());
         viewMetrics.putExtra("View_Abnormalities", mPatients.get(position).getBool_abnormalities());
         viewMetrics.putExtra("View_Surg_Damage", mPatients.get(position).getBool_surg_damage());
 
